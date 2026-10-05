@@ -691,7 +691,6 @@ const completeIdea = document.getElementById("complete-idea");
       body: JSON.stringify(data)
     })
   .then(function () {
-.then(function () {
   completeName.textContent = name || "未入力";
   completeQuantity.textContent = quantity;
   completePrice.textContent = quantity * PRICE_PER_UNIT;
