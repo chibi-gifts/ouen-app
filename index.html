@@ -4,13 +4,40 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>応援アプリ</title>
+<style>
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(
+      180deg,
+      #080d2b 0%,
+      #17134a 50%,
+      #3a1765 100%
+    );
+    color: white;
+    text-align: center;
+    font-family: sans-serif;
+  }
+
+  .app {
+    min-height: 100vh;
+    padding: 40px 20px;
+    box-sizing: border-box;
+  }
+
+  h1 {
+    margin-top: 20px;
+  }
+</style>
 </head>
 
 <body>
-  <h1>🎁 応援アプリ</h1>
+  <div class="app">
+    <h1>🎁 応援アプリ</h1>
 
-  <p>チームの隊長へ、応援を届けよう。</p>
+    <p>チームの隊長へ、応援を届けよう。</p>
 
-  <p id="support-count">現在の応援口数 0</p>
+    <p id="support-count">現在の応援口数 0</p>
+  </div>
 </body>
 </html>
