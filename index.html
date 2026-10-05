@@ -125,6 +125,26 @@
     transform: scale(1.2);
   }
 }
+.orb {
+  width: min(72vw, 300px);
+  height: auto;
+  display: block;
+  margin: 35px auto 25px;
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 0 18px rgba(220, 200, 255, 0.75));
+  animation: floatOrb 4s ease-in-out infinite;
+}
+
+@keyframes floatOrb {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
 </style>
 </head>
 
@@ -133,7 +153,11 @@
     <h1>🎁 応援アプリ</h1>
 
     <p>チームの隊長へ、応援を届けよう。</p>
-
+<img
+  src="sphere.png"
+  alt="幻想的な応援の球体"
+  class="orb"
+>
     <p id="support-count">現在の応援口数 0</p>
   </div>
 <div class="stars">
