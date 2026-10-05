@@ -640,6 +640,53 @@ reasonOptions.forEach(function (option) {
     confirmScreen.style.display = "none";
     supportButton.style.display = "inline-block";
   });
+    const finalSupportButton =
+    document.getElementById("final-support-btn");
+
+  const GAS_URL =
+    "https://script.google.com/macros/s/AKfycbzv0v5llJDwFN8gCZ6b78LVdcrIsRBd100OpcIs_lYu-xkm4zb1FIl6dhF9JtDdRc5f/exec";
+
+  finalSupportButton.addEventListener("click", function () {
+    const name = document.getElementById("user-name").value.trim();
+    const idea = document.getElementById("app-idea").value.trim();
+
+    const selectedReasons = Array.from(
+      document.querySelectorAll(".reason-option.selected")
+    ).map(function (option) {
+      return option.textContent.trim();
+    });
+
+    const otherReason =
+      document.getElementById("other-reason").value.trim();
+
+    const data = {
+      name: name,
+      quantity: quantity,
+      amount: quantity * PRICE_PER_UNIT,
+      reason: selectedReasons.join("、"),
+      otherReason: otherReason,
+      appIdea: idea
+    };
+
+    finalSupportButton.disabled = true;
+    finalSupportButton.textContent = "送信中…";
+
+    fetch(GAS_URL, {
+      method: "POST",
+      mode: "no-cors",
+      body: JSON.stringify(data)
+    })
+      .then(function () {
+        alert("✨ 応援を届けました！ ✨");
+      })
+      .catch(function (error) {
+        console.error(error);
+        alert("送信できませんでした。もう一度お試しください。");
+        finalSupportButton.disabled = false;
+        finalSupportButton.textContent =
+          "✨ この内容で応援する ✨";
+      });
+  });
 </script>
 </body>
 </html>
