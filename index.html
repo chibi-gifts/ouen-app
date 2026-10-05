@@ -296,6 +296,53 @@
 .name-input::placeholder {
   color: rgba(255, 255, 255, 0.55);
 }
+  .reason-box {
+  width: min(90%, 360px);
+  margin: 0 auto 25px;
+  padding: 18px 20px;
+  box-sizing: border-box;
+
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 22px;
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.reason-title {
+  margin: 0 0 14px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.reason-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.reason-option {
+  padding: 10px 13px;
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.10);
+  color: white;
+
+  font-size: 13px;
+  line-height: 1.4;
+
+  cursor: pointer;
+}
+
+.reason-option.selected {
+  background: rgba(210, 180, 255, 0.30);
+  border-color: rgba(255, 235, 255, 0.75);
+  box-shadow: 0 0 12px rgba(220, 190, 255, 0.45);
+}
 </style>
 </head>
 
@@ -345,6 +392,35 @@
       placeholder="お名前を入力してください"
       maxlength="20"
     >
+  </div>
+      <div class="reason-box">
+    <p class="reason-title">応援する理由</p>
+
+    <div class="reason-options">
+      <button type="button" class="reason-option">
+        いつもお世話になっているから
+      </button>
+
+      <button type="button" class="reason-option">
+        AIを使って更にラクラク参加したいから
+      </button>
+
+      <button type="button" class="reason-option">
+        企画を応援したいから
+      </button>
+
+      <button type="button" class="reason-option">
+        みんなの負担を減らしたいから
+      </button>
+
+      <button type="button" class="reason-option">
+        新しいことに挑戦するのを応援したいから
+      </button>
+
+      <button type="button" class="reason-option">
+        その他
+      </button>
+    </div>
   </div>
   </div>
 <div class="stars">
@@ -414,6 +490,17 @@
   });
 
   updateSupportStatus();
+  const reasonOptions = document.querySelectorAll(".reason-option");
+
+  reasonOptions.forEach(function (option) {
+    option.addEventListener("click", function () {
+      reasonOptions.forEach(function (item) {
+        item.classList.remove("selected");
+      });
+
+      option.classList.add("selected");
+    });
+  });
 </script>
 </body>
 </html>
