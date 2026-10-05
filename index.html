@@ -351,6 +351,49 @@
 .other-reason-box.show {
   display: block;
 }
+  .idea-box {
+  width: min(90%, 360px);
+  margin: 0 auto 25px;
+  padding: 18px 20px;
+  box-sizing: border-box;
+
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 22px;
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.idea-title {
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.idea-input {
+  width: 100%;
+  min-height: 120px;
+  padding: 13px 15px;
+  box-sizing: border-box;
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, 0.10);
+  color: white;
+
+  font-size: 16px;
+  line-height: 1.6;
+  font-family: sans-serif;
+
+  outline: none;
+  resize: vertical;
+}
+
+.idea-input::placeholder {
+  color: rgba(255, 255, 255, 0.55);
+}
 </style>
 </head>
 
@@ -439,6 +482,18 @@
 </div>
     </div>
   </div>
+
+  <div class="idea-box">
+    <p class="idea-title">💡 こんなアプリがあったら嬉しい！</p>
+
+    <textarea
+      id="app-idea"
+      class="idea-input"
+      maxlength="200"
+      placeholder="こんなアプリがあったら嬉しい！を自由に書いてください"
+    ></textarea>
+  </div>
+
   </div>
 <div class="stars">
   <span>✦</span>
