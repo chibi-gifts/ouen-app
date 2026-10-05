@@ -690,9 +690,17 @@ const completeIdea = document.getElementById(“complete-idea”);
       mode: "no-cors",
       body: JSON.stringify(data)
     })
-      .then(function () {
-        alert("✨ 応援を届けました！ ✨");
-      })
+  .then(function () {
+completeName.textContent = name || “未入力”;
+completeQuantity.textContent = quantity;
+completePrice.textContent = quantity * PRICE_PER_UNIT;
+completeReason.textContent =
+selectedReasons.length > 0 ? selectedReasons.join(”、”) : “未選択”;
+completeIdea.textContent = idea || “未入力”;
+
+confirmScreen.style.display = “none”;
+completeScreen.style.display = “block”;
+})
       .catch(function (error) {
         console.error(error);
         alert("送信できませんでした。もう一度お試しください。");
