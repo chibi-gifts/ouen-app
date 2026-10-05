@@ -614,12 +614,12 @@ reasonOptions.forEach(function (option) {
   const confirmPrice = document.getElementById("confirm-price");
   const confirmReason = document.getElementById("confirm-reason");
   const confirmIdea = document.getElementById("confirm-idea");
-const completeScreen = document.getElementById(“complete-screen”);
-const completeName = document.getElementById(“complete-name”);
-const completeQuantity = document.getElementById(“complete-quantity”);
-const completePrice = document.getElementById(“complete-price”);
-const completeReason = document.getElementById(“complete-reason”);
-const completeIdea = document.getElementById(“complete-idea”);
+const completeScreen = document.getElementById("complete-screen");
+const completeName = document.getElementById("complete-name");
+const completeQuantity = document.getElementById("complete-quantity");
+const completePrice = document.getElementById("complete-price");
+const completeReason = document.getElementById("complete-reason");
+const completeIdea = document.getElementById("complete-idea");
   const backButton = document.getElementById("back-btn");
 
   supportButton.addEventListener("click", function () {
@@ -691,15 +691,16 @@ const completeIdea = document.getElementById(“complete-idea”);
       body: JSON.stringify(data)
     })
   .then(function () {
-completeName.textContent = name || “未入力”;
-completeQuantity.textContent = quantity;
-completePrice.textContent = quantity * PRICE_PER_UNIT;
-completeReason.textContent =
-selectedReasons.length > 0 ? selectedReasons.join(”、”) : “未選択”;
-completeIdea.textContent = idea || “未入力”;
+.then(function () {
+  completeName.textContent = name || "未入力";
+  completeQuantity.textContent = quantity;
+  completePrice.textContent = quantity * PRICE_PER_UNIT;
+  completeReason.textContent =
+    selectedReasons.length > 0 ? selectedReasons.join("、") : "未選択";
+  completeIdea.textContent = idea || "未入力";
 
-confirmScreen.style.display = “none”;
-completeScreen.style.display = “block”;
+  confirmScreen.style.display = "none";
+  completeScreen.style.display = "block";
 })
       .catch(function (error) {
         console.error(error);
