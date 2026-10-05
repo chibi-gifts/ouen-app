@@ -258,6 +258,44 @@
   font-size: 14px;
   opacity: 0.8;
 }
+.name-box {
+  width: min(90%, 360px);
+  margin: 0 auto 25px;
+  padding: 18px 20px;
+  box-sizing: border-box;
+
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 22px;
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.name-title {
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.name-input {
+  width: 100%;
+  padding: 13px 15px;
+  box-sizing: border-box;
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, 0.10);
+  color: white;
+
+  font-size: 16px;
+  outline: none;
+}
+
+.name-input::placeholder {
+  color: rgba(255, 255, 255, 0.55);
+}
 </style>
 </head>
 
@@ -297,6 +335,17 @@
     1口 150円
   </p>
 </div>
+      <div class="name-box">
+    <p class="name-title">お部屋で使用している名前</p>
+
+    <input
+      type="text"
+      id="user-name"
+      class="name-input"
+      placeholder="お名前を入力してください"
+      maxlength="20"
+    >
+  </div>
   </div>
 <div class="stars">
   <span>✦</span>
