@@ -145,6 +145,119 @@
     transform: translateY(-8px);
   }
 }
+.support-status {
+  width: min(90%, 360px);
+  margin: 10px auto 30px;
+  padding: 18px 20px;
+  box-sizing: border-box;
+
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 22px;
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  box-shadow:
+    0 0 20px rgba(180, 160, 255, 0.18),
+    inset 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+.support-number {
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.remaining-number {
+  margin-top: 8px;
+  font-size: 15px;
+  opacity: 0.85;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  margin-top: 16px;
+  overflow: hidden;
+
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+}
+
+.progress-fill {
+  width: 0%;
+  height: 100%;
+  border-radius: 999px;
+
+  background: linear-gradient(
+    90deg,
+    #9e8cff,
+    #e6c8ff,
+    #fff2b8
+  );
+
+  box-shadow: 0 0 12px rgba(230, 200, 255, 0.8);
+}
+.quantity-box {
+  width: min(90%, 360px);
+  margin: 0 auto 25px;
+  padding: 18px 20px;
+  box-sizing: border-box;
+
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 22px;
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.quantity-title {
+  margin: 0 0 14px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+}
+
+.quantity-control button {
+  width: 48px;
+  height: 48px;
+
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+
+  font-size: 28px;
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+.quantity-control button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+#quantity {
+  min-width: 40px;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.quantity-price {
+  margin: 12px 0 0;
+  font-size: 14px;
+  opacity: 0.8;
+}
 </style>
 </head>
 
@@ -158,7 +271,32 @@
   alt="幻想的な応援の球体"
   class="orb"
 >
-    <p id="support-count">現在の応援口数 0</p>
+ <div class="support-status">
+  <div class="support-number">
+    現在 <span id="current-count">0</span> / 100口
+  </div>
+
+  <div class="remaining-number">
+    残り <span id="remaining-count">100</span>口
+  </div>
+
+  <div class="progress-bar">
+    <div class="progress-fill" id="progress-fill"></div>
+  </div>
+</div>
+  <div class="quantity-box">
+  <p class="quantity-title">応援する口数</p>
+
+  <div class="quantity-control">
+    <button type="button" id="minus-btn">−</button>
+    <span id="quantity">1</span>
+    <button type="button" id="plus-btn">＋</button>
+  </div>
+
+  <p class="quantity-price">
+    1口 150円
+  </p>
+</div>
   </div>
 <div class="stars">
   <span>✦</span>
@@ -174,5 +312,59 @@
   <span>✧</span>
   <span>⋆</span>
 </div>
+<script>
+  const TOTAL_GOAL = 100;
+  const PRICE_PER_UNIT = 150;
+
+  let currentCount = 0;
+  let quantity = 1;
+
+  const currentCountElement = document.getElementById("current-count");
+  const remainingCountElement = document.getElementById("remaining-count");
+  const progressFillElement = document.getElementById("progress-fill");
+  const quantityElement = document.getElementById("quantity");
+
+  const minusButton = document.getElementById("minus-btn");
+  const plusButton = document.getElementById("plus-btn");
+
+  function updateSupportStatus() {
+    const remaining = TOTAL_GOAL - currentCount;
+
+    currentCountElement.textContent = currentCount;
+    remainingCountElement.textContent = remaining;
+
+    const progress = (currentCount / TOTAL_GOAL) * 100;
+    progressFillElement.style.width = progress + "%";
+
+    if (remaining <= 0) {
+      quantity = 0;
+    } else if (quantity > remaining) {
+      quantity = remaining;
+    }
+
+    quantityElement.textContent = quantity;
+
+    minusButton.disabled = quantity <= 1;
+    plusButton.disabled = quantity >= remaining;
+  }
+
+  minusButton.addEventListener("click", function () {
+    if (quantity > 1) {
+      quantity--;
+      updateSupportStatus();
+    }
+  });
+
+  plusButton.addEventListener("click", function () {
+    const remaining = TOTAL_GOAL - currentCount;
+
+    if (quantity < remaining) {
+      quantity++;
+      updateSupportStatus();
+    }
+  });
+
+  updateSupportStatus();
+</script>
 </body>
 </html>
