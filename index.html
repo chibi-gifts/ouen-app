@@ -428,6 +428,15 @@
       <button type="button" class="reason-option">
         その他
       </button>
+      <div id="other-reason-box" class="other-reason-box">
+  <input
+    type="text"
+    id="other-reason"
+    class="name-input"
+    placeholder="応援する理由を入力してください"
+    maxlength="200"
+  >
+</div>
     </div>
   </div>
   </div>
@@ -498,8 +507,6 @@
   });
 
   updateSupportStatus();
-  const reasonOptions = document.querySelectorAll(".reason-option");
-
   const reasonOptions = document.querySelectorAll(".reason-option");
 const otherReasonBox = document.getElementById("other-reason-box");
 
