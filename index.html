@@ -567,16 +567,14 @@ const otherReasonBox = document.getElementById("other-reason-box");
 
 reasonOptions.forEach(function (option) {
   option.addEventListener("click", function () {
-    reasonOptions.forEach(function (item) {
-      item.classList.remove("selected");
-    });
-
-    option.classList.add("selected");
+    option.classList.toggle("selected");
 
     if (option.textContent.trim() === "その他") {
-      otherReasonBox.classList.add("show");
-    } else {
-      otherReasonBox.classList.remove("show");
+      if (option.classList.contains("selected")) {
+        otherReasonBox.classList.add("show");
+      } else {
+        otherReasonBox.classList.remove("show");
+      }
     }
   });
 });
