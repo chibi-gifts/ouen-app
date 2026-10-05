@@ -659,7 +659,23 @@ const completeIdea = document.getElementById("complete-idea");
 
   const GAS_URL =
     "https://script.google.com/macros/s/AKfycbzv0v5llJDwFN8gCZ6b78LVdcrIsRBd100OpcIs_lYu-xkm4zb1FIl6dhF9JtDdRc5f/exec";
+function loadCurrentCount() {
+  fetch(GAS_URL)
+    .then(function (response) {
+      return response.text();
+    })
+    .then(function (text) {
+      const match = text.match(/\d+/);
 
+      if (match) {
+        currentCount = Number(match[0]);
+        updateSupportStatus();
+      }
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
+}
   finalSupportButton.addEventListener("click", function () {
     const name = document.getElementById("user-name").value.trim();
     const idea = document.getElementById("app-idea").value.trim();
