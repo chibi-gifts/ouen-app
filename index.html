@@ -597,6 +597,49 @@ reasonOptions.forEach(function (option) {
     }
   });
 });
+    const supportButton = document.getElementById("support-btn");
+  const confirmScreen = document.getElementById("confirm-screen");
+
+  const confirmName = document.getElementById("confirm-name");
+  const confirmQuantity = document.getElementById("confirm-quantity");
+  const confirmPrice = document.getElementById("confirm-price");
+  const confirmReason = document.getElementById("confirm-reason");
+  const confirmIdea = document.getElementById("confirm-idea");
+
+  const backButton = document.getElementById("back-btn");
+
+  supportButton.addEventListener("click", function () {
+    const name = document.getElementById("user-name").value.trim();
+    const idea = document.getElementById("app-idea").value.trim();
+
+    const selectedReasons = Array.from(
+      document.querySelectorAll(".reason-option.selected")
+    ).map(function (option) {
+      return option.textContent.trim();
+    });
+
+    const otherReason = document.getElementById("other-reason").value.trim();
+
+    if (selectedReasons.includes("その他") && otherReason) {
+      selectedReasons[selectedReasons.indexOf("その他")] =
+        "その他：" + otherReason;
+    }
+
+    confirmName.textContent = name || "未入力";
+    confirmQuantity.textContent = quantity;
+    confirmPrice.textContent = quantity * PRICE_PER_UNIT;
+    confirmReason.textContent =
+      selectedReasons.length > 0 ? selectedReasons.join("、") : "未選択";
+    confirmIdea.textContent = idea || "未入力";
+
+    confirmScreen.style.display = "block";
+    supportButton.style.display = "none";
+  });
+
+  backButton.addEventListener("click", function () {
+    confirmScreen.style.display = "none";
+    supportButton.style.display = "inline-block";
+  });
 </script>
 </body>
 </html>
