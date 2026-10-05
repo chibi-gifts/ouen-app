@@ -429,9 +429,9 @@
     <button type="button" id="plus-btn">＋</button>
   </div>
 
-  <p class="quantity-price">
-    1口 150円
-  </p>
+<p class="quantity-price">
+  応援金額：<span id="total-price">150</span>円
+</p>
 </div>
       <div class="name-box">
     <p class="name-title">お部屋で使用している名前</p>
@@ -520,7 +520,7 @@ placeholder="今後作ってほしいアプリのアイデアを書いてくだ�
   const remainingCountElement = document.getElementById("remaining-count");
   const progressFillElement = document.getElementById("progress-fill");
   const quantityElement = document.getElementById("quantity");
-
+  const totalPriceElement = document.getElementById("total-price");
   const minusButton = document.getElementById("minus-btn");
   const plusButton = document.getElementById("plus-btn");
 
@@ -540,7 +540,7 @@ placeholder="今後作ってほしいアプリのアイデアを書いてくだ�
     }
 
     quantityElement.textContent = quantity;
-
+    totalPriceElement.textContent = quantity * PRICE_PER_UNIT;
     minusButton.disabled = quantity <= 1;
     plusButton.disabled = quantity >= remaining;
   }
