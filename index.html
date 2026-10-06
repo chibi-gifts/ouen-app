@@ -784,6 +784,10 @@ const completeIdea = document.getElementById("complete-idea");
       return option.textContent.trim();
     });
 
+       if (selectedReasons.length === 0) {
+      alert("応援する理由を1つ以上選択してください");
+      return;
+    }
     const otherReason = document.getElementById("other-reason").value.trim();
 
     if (selectedReasons.includes("その他") && otherReason) {
