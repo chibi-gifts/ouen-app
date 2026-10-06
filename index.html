@@ -408,40 +408,7 @@ h1 {
     background 0.2s ease;
 }
 
-.reason-option::before {
-  content: "";
-  display: block;
-  width: 13px;
-  height: 17px;
-  flex-shrink: 0;
-  margin-right: 7px;
 
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255,255,255,0.98) 0%,
-      rgba(210,245,255,0.95) 25%,
-      rgba(135,210,255,0.95) 48%,
-      rgba(185,145,255,0.95) 70%,
-      rgba(255,255,255,0.98) 100%
-    );
-
-  clip-path: polygon(
-    50% 0%,
-    88% 25%,
-    100% 58%,
-    50% 100%,
-    0% 58%,
-    12% 25%
-  );
-
-  filter:
-    drop-shadow(0 0 2px #ffffff)
-    drop-shadow(0 0 5px rgba(190,235,255,0.95))
-    drop-shadow(0 0 9px rgba(175,140,255,0.75));
-
-  transform: rotate(0deg);
-}
 .reason-option.selected {
   background:
     linear-gradient(
@@ -465,25 +432,7 @@ h1 {
     0 0 5px rgba(255,255,255,0.8),
     0 0 10px rgba(230,210,255,0.65);
 }
-  .reason-option.selected::before {
-  background:
-    linear-gradient(
-      135deg,
-      #ffffff 0%,
-      #ffffff 20%,
-      #eadcff 38%,
-      #b58cff 58%,
-      #fff8df 82%,
-      #ffffff 100%
-    );
 
-  filter:
-    drop-shadow(0 0 3px #ffffff)
-    drop-shadow(0 0 8px #eadcff)
-    drop-shadow(0 0 14px #b58cff);
-
-  transform: rotate(8deg) scale(1.12);
-}
   .other-reason-box {
   display: none;
   margin-top: 12px;
