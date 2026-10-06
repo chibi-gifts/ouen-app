@@ -1238,8 +1238,25 @@ function loadCurrentCount() {
       completeScreen.style.display = "block";
 
       finalSupportButton.disabled = false;
-      finalSupportButton.textContent =
-        "✨ この内容で応援する ✨";
+      finalSupportButton.textContent = "✨ この内容で応援する ✨";
+
+      // 入力内容をリセット
+      document.getElementById("user-name").value = "";
+      document.getElementById("other-reason").value = "";
+      document.getElementById("app-idea").value = "";
+
+      document.querySelectorAll(".reason-option").forEach(function (option) {
+        option.classList.remove("selected");
+      });
+
+      otherReasonBox.classList.remove("show");
+
+      quantity = 1;
+      nameCount.textContent = "0 / 20";
+      ideaCount.textContent = "0 / 200";
+      updateSupportStatus();
+
+      supportButton.style.display = "block";
 
       loadCurrentCount();
     }, 1000);
