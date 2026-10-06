@@ -772,6 +772,10 @@ const completeIdea = document.getElementById("complete-idea");
 
   supportButton.addEventListener("click", function () {
     const name = document.getElementById("user-name").value.trim();
+       if (!name) {
+      alert("お名前を入力してください");
+      return;
+    }
     const idea = document.getElementById("app-idea").value.trim();
 
     const selectedReasons = Array.from(
