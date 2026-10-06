@@ -590,7 +590,7 @@ placeholder="今後作ってほしいアプリのアイデアを書いてくだ�
   });
 
   updateSupportStatus();
-  loadCurrentCount();
+  
   const reasonOptions = document.querySelectorAll(".reason-option");
 const otherReasonBox = document.getElementById("other-reason-box");
 
@@ -677,6 +677,7 @@ function loadCurrentCount() {
       console.error(error);
     });
 }
+  loadCurrentCount();
   finalSupportButton.addEventListener("click", function () {
     const name = document.getElementById("user-name").value.trim();
     const idea = document.getElementById("app-idea").value.trim();
