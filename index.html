@@ -876,6 +876,19 @@ function loadCurrentCount() {
       loadCurrentCount();
     }, 1000);
   });
+    const userNameInput = document.getElementById("user-name");
+  const nameCount = document.getElementById("name-count");
+
+  const appIdeaInput = document.getElementById("app-idea");
+  const ideaCount = document.getElementById("idea-count");
+
+  userNameInput.addEventListener("input", function () {
+    nameCount.textContent = userNameInput.value.length + " / 20";
+  });
+
+  appIdeaInput.addEventListener("input", function () {
+    ideaCount.textContent = appIdeaInput.value.length + " / 200";
+  });
 </script>
 </body>
 </html>
