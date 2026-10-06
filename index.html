@@ -1328,6 +1328,13 @@ function loadCurrentCount() {
   appIdeaInput.addEventListener("input", function () {
     ideaCount.textContent = appIdeaInput.value.length + " / 200";
   });
+    const againSupportButton =
+    document.getElementById("again-support-btn");
+
+  againSupportButton.addEventListener("click", function () {
+    completeScreen.style.display = "none";
+    supportButton.style.display = "block";
+  });
 </script>
 </body>
 </html>
