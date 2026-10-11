@@ -1177,13 +1177,6 @@ function updateSupportStatus() {
     MAX_QUANTITY > 0 && currentCount + quantity >= MAX_QUANTITY;
 }
 
-
-    quantityElement.textContent = quantity;
-    totalPriceElement.textContent = quantity * PRICE_PER_UNIT;
-    minusButton.disabled = quantity <= 1;
-    plusButton.disabled = quantity >= remaining;
-  }
-
   minusButton.addEventListener("click", function () {
     if (quantity > 1) {
       quantity--;
