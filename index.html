@@ -1101,11 +1101,12 @@ placeholder="今後作ってほしいアプリのアイデアを書いてくだ�
   <span>✦</span>
 </div>
 <script>
-  const TOTAL_GOAL = 100;
-  const PRICE_PER_UNIT = 150;
+let TOTAL_GOAL = 100;
+let PRICE_PER_UNIT = 150;
+let MAX_QUANTITY = 0;
 
-  let currentCount = 0;
-  let quantity = 1;
+let currentCount = 0;
+let quantity = 1;
 
   const currentCountElement = document.getElementById("current-count");
   const remainingCountElement = document.getElementById("remaining-count");
@@ -1114,21 +1115,68 @@ placeholder="今後作ってほしいアプリのアイデアを書いてくだ�
   const totalPriceElement = document.getElementById("total-price");
   const minusButton = document.getElementById("minus-btn");
   const plusButton = document.getElementById("plus-btn");
+const targetCountElement = document.getElementById("target-count");
+const goalQuantityElement = document.getElementById("goal-quantity");
+const unitPriceElement = document.getElementById("unit-price");
+const goalAmountElement = document.getElementById("goal-amount");
 
-  function updateSupportStatus() {
-    const remaining = TOTAL_GOAL - currentCount;
+function loadSettings() {
+  fetch(GAS_URL + "?action=settings")
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (settings) {
+      if (!settings.success) {
+        throw new Error("設定を取得できませんでした");
+      }
 
-    currentCountElement.textContent = currentCount;
-    remainingCountElement.textContent = remaining;
+      TOTAL_GOAL = Number(settings.targetQuantity);
+      PRICE_PER_UNIT = Number(settings.unitPrice);
+      MAX_QUANTITY = Number(settings.maxQuantity);
 
-    const progress = (currentCount / TOTAL_GOAL) * 100;
-    progressFillElement.style.width = progress + "%";
+      targetCountElement.textContent = TOTAL_GOAL;
+      goalQuantityElement.textContent = TOTAL_GOAL;
+      unitPriceElement.textContent = PRICE_PER_UNIT;
+      goalAmountElement.textContent =
+        (TOTAL_GOAL * PRICE_PER_UNIT).toLocaleString("ja-JP");
 
-    if (remaining <= 0) {
+      updateSupportStatus();
+    })
+    .catch(function (error) {
+      console.error("設定取得エラー:", error);
+    });
+}
+
+function updateSupportStatus() {
+  const remaining = Math.max(0, TOTAL_GOAL - currentCount);
+
+  currentCountElement.textContent = currentCount;
+  remainingCountElement.textContent = remaining;
+
+  const progress = Math.min(100, (currentCount / TOTAL_GOAL) * 100);
+  progressFillElement.style.width = progress + "%";
+
+  if (MAX_QUANTITY > 0) {
+    const maxRemaining = Math.max(0, MAX_QUANTITY - currentCount);
+
+    if (maxRemaining === 0) {
       quantity = 0;
-    } else if (quantity > remaining) {
-      quantity = remaining;
+    } else if (quantity > maxRemaining) {
+      quantity = maxRemaining;
     }
+  } else if (quantity < 1) {
+    quantity = 1;
+  }
+
+  quantityElement.textContent = quantity;
+  totalPriceElement.textContent =
+    (quantity * PRICE_PER_UNIT).toLocaleString("ja-JP");
+
+  minusButton.disabled = quantity <= 1;
+  plusButton.disabled =
+    MAX_QUANTITY > 0 && currentCount + quantity >= MAX_QUANTITY;
+}
+
 
     quantityElement.textContent = quantity;
     totalPriceElement.textContent = quantity * PRICE_PER_UNIT;
@@ -1143,14 +1191,14 @@ placeholder="今後作ってほしいアプリのアイデアを書いてくだ�
     }
   });
 
-  plusButton.addEventListener("click", function () {
-    const remaining = TOTAL_GOAL - currentCount;
 
-    if (quantity < remaining) {
-      quantity++;
-      updateSupportStatus();
-    }
-  });
+plusButton.addEventListener("click", function () {
+  if (MAX_QUANTITY === 0 || currentCount + quantity < MAX_QUANTITY) {
+    quantity++;
+    updateSupportStatus();
+  }
+});
+
 
   updateSupportStatus();
   
@@ -1231,7 +1279,8 @@ const completeIdea = document.getElementById("complete-idea");
 
   const GAS_URL =
     "https://script.google.com/macros/s/AKfycbzv0v5llJDwFN8gCZ6b78LVdcrIsRBd100OpcIs_lYu-xkm4zb1FIl6dhF9JtDdRc5f/exec";
-function loadCurrentCount() {
+loadSettings();
+  function loadCurrentCount() {
   fetch(GAS_URL)
     .then(function (response) {
       return response.text();
