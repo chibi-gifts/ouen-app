@@ -920,19 +920,23 @@ white-space: nowrap;
 
 <h1>✧︎ 応援を届けよう ✧︎</h1>
  <div class="support-status">
-  <div class="support-number">
-    現在 <span id="current-count">0</span> / 100口
-  </div>
+<div class="support-number">
+  現在 <span id="current-count">0</span> /
+  <span id="target-count">100</span>口
+</div>
 
-  <div class="remaining-number">
-    残り <span id="remaining-count">100</span>口
-  </div>
+<div class="remaining-number">
+  目標まで残り <span id="remaining-count">100</span>口
+</div>
 
-  <div class="progress-bar">
-    <div class="progress-fill" id="progress-fill"></div>
-  </div>
-   <div class="goal-info">
-  目標：100口（1口150円）　合計：15,000円
+<div class="progress-bar">
+  <div class="progress-fill" id="progress-fill"></div>
+</div>
+
+<div class="goal-info">
+  目標：<span id="goal-quantity">100</span>口
+  （1口<span id="unit-price">150</span>円）
+  合計：<span id="goal-amount">15,000</span>円
 </div>
 </div>
   <div class="quantity-box">
