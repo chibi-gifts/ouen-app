@@ -1293,11 +1293,11 @@ loadSettings();
   loadCurrentCount();
 
   // 表示テスト用（テスト終了後に削除）
-  setTimeout(function () {
+  setInterval(function () {
     currentCountElement.textContent = "101";
     remainingCountElement.textContent = "0";
     progressFillElement.style.width = "100%";
-  }, 1500);
+  }, 500);
 
   finalSupportButton.addEventListener("click", function () {
     const name = document.getElementById("user-name").value.trim();
